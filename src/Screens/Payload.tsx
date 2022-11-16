@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Info from "../Components/Info";
 import Card from "../Components/Card";
@@ -86,8 +85,6 @@ export default function Payload() {
           <Text style={styles.textWhite}>Reiniciar Partida</Text>
         </TouchableOpacity>
       )}
-
-      <StatusBar style="light" />
     </View>
   );
 }

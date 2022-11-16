@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "myappsss",
-    "slug": "myappsss",
+    "name": "memorygame",
+    "slug": "memorygame",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.areyesarean.myappsss"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3d4ab60b-b5c8-4282-b09e-55c61d1f0379"
+      }
     }
   }
 }
