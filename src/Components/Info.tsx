@@ -20,9 +20,9 @@ export default function Info({ winn, score }: Props) {
 
   return (
     <View style={styles.container}>
-      <Text style={winn ? [styles.title, styles.titleWin] : styles.title}>
-        {winn ? "🎉 Haz Ganado 🎉" : "Juego de memoria"}
-      </Text>
+      { winn && (<Text style={winn ? [styles.title, styles.titleWin] : styles.title}>
+        🎉 Haz Ganado 🎉
+      </Text>)}
       <View style={styles.containerTextMov}>
         <Text style={[styles.title, styles.titleMov]}>Movimientos: </Text>
         <Text style={winn ? [styles.title, styles.titleMovWin] : styles.title}>
@@ -31,7 +31,7 @@ export default function Info({ winn, score }: Props) {
       </View>
       {winn && (
         <Text style={[styles.title, styles.titleMov]}>
-          Valoración de tu partida: {getValoracion()}
+          Valoración de la partida: {getValoracion()}
         </Text>
       )}
     </View>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     color: "#05eeff",
   },
   title: {
-    fontSize: 45,
+    fontSize: 40,
     fontWeight: "800",
     color: "#fff",
   },

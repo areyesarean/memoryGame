@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Info from "../Components/Info";
 import Card from "../Components/Card";
 
-const cardsB: string[] = ["😎", "🎉", "🎶", "🎈", "🎁", "⚽"];
-const cardsB1: string[] = ["🤩", "🌍", "🛩", "☀", "🎅", "🎃"];
+const cardsB: string[] = ["😎", "🎉", "🤑", "🎈", "🎁", "⚽"];
+const cardsB1: string[] = ["🤩", "🌍", "🤡", "☀", "🎅", "🎃"];
 
 export default function Payload() {
   const [cards, setCards] = useState(() => {
@@ -34,7 +34,6 @@ export default function Payload() {
     if (selectedCard.length < 2) return;
 
     //* Si son iguales las cartas se quedan volteadas
-
     if (cards[selectedCard[0]] === cards[selectedCard[1]]) {
       setMatchedCard((matchedCard) => [...matchedCard, ...selectedCard]);
       setSelectedCard([]);
@@ -58,7 +57,7 @@ export default function Payload() {
     setMatchedCard([]);
     setSelectedCard([]);
     setMov(0);
-    setCards([...cardsB, ...cardsB].sort(() => Math.random() - 0.5))
+    setCards([...cardsB, ...cardsB].sort(() => Math.random() - 0.5));
   };
 
   return (
@@ -80,9 +79,13 @@ export default function Payload() {
         })}
       </View>
 
-      {PlayerWin() && (
+      {PlayerWin() ? (
         <TouchableOpacity style={styles.resetButton} onPress={Reset}>
           <Text style={styles.textWhite}>Reiniciar Partida</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.resetButton} onPress={Reset}>
+          <Text style={styles.textWhite}>Volver a comenzar</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -99,7 +102,10 @@ const styles = StyleSheet.create({
   board: {
     flexDirection: "row",
     flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 20,
+    marginBottom: 10
   },
   resetButton: {
     padding: 10,
