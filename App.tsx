@@ -4,6 +4,7 @@ import Payload from "./src/Screens/Payload";
 import Welcome from "./src/Screens/Welcome";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import PackEmojis from "./src/Screens/PackEmojis";
 
 const cardsB: string[] = ["😎", "🎉", "🤑", "🎈", "🎁", "⚽"];
 const cardsB1: string[] = ["🤩", "🌍", "🛩", "☀", "🎅", "🎃"];
@@ -23,6 +24,10 @@ export default function App() {
         <Stack.Screen 
           name="Payload" 
           component={Payload} 
+        />
+        <Stack.Screen 
+          name="Packs" 
+          component={PackEmojis} 
         />
       </Stack.Navigator>
       <StatusBar style="light" />
