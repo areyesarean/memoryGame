@@ -1,8 +1,26 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import ButtonMenu from "../Components/ButtonMenu";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import useGameContext from "../Hooks/useGameContext";
+import { NamePacks } from "../Contexts/ContextGame";
 
 export default function Welcome() {
+  const {handlePackSelect} = useGameContext();
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const pack = await AsyncStorage.getItem('@packSelect')
+        if(pack !== null) {
+          handlePackSelect(pack as NamePacks)
+        }
+      } catch(e) {
+        console.log(e);
+      }
+    }
+    getData()
+  }, [])
 
   return (
     <View style={styles.container}>

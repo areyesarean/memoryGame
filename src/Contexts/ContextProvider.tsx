@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { ContextGame, NamePacks, Packs } from "./ContextGame";
 
 interface Props {
@@ -16,7 +17,7 @@ let allPacks: Packs = {
   pack0: ["😎", "🎉", "🎶", "🎈", "🎁", "⚽"],
   pack1: ["🤩", "😡", "🛩", "☀", "🎅", "🎃"],
   pack2: ["🐸", "😻", "🙈", "🦊", "🐔", "🐑"],
-  pack3: ["🚀", "🚨", "🧭", "🚒", "💧", "🌜"]
+  pack3: ["🚀", "🚨", "🧭", "🚒", "💧", "🌜"],
 };
 
 export default function ContextProvider({ children }: Props) {
@@ -24,6 +25,14 @@ export default function ContextProvider({ children }: Props) {
 
   const handlePackSelect = useCallback(
     (pack: NamePacks) => {
+      const getData = async () => {
+        try {
+          await AsyncStorage.setItem("@packSelect", pack);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      getData();
       setPackSelect(allPacks[pack]);
     },
     [setPackSelect]
