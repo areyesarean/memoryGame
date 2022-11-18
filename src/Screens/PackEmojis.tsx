@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import RadioButton from "../Components/RadioButton";
+import useGameContext from "../Hooks/useGameContext";
 
-const pack0: string[] = ["😎", "🎉", "🎶", "🎈", "🎁", "⚽"];
-const pack1: string[] = ["🤩", "🌍", "🛩", "☀", "🎅", "🎃"];
 
 export default function PackEmojis() {
+  const {packs} = useGameContext();
+  const {pack0,  pack1} = packs;
   const [firstPackActive, setFirstPackActive] = useState(true)
   const [secondPackActive, setSecondPackActive] = useState(false)
 

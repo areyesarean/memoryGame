@@ -2,9 +2,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const cardsB: string[] = ["😎", "🎉", "🎶", "🎈", "🎁", "⚽"];
-const cardsB1: string[] = ["🤩", "🌍", "🛩", "☀", "🎅", "🎃"];
-
 export default function Welcome() {
   const navigation = useNavigation();
 

@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Info from "../Components/Info";
 import Card from "../Components/Card";
-
-const cardsB: string[] = ["😎", "🎉", "🤑", "🎈", "🎁", "⚽"];
-const cardsB1: string[] = ["🤩", "🌍", "🤡", "☀", "🎅", "🎃"];
+import useGameContext from "../Hooks/useGameContext";
 
 export default function Payload() {
+  const { packSelect } = useGameContext();
   const [cards, setCards] = useState(() => {
-    return [...cardsB, ...cardsB].sort(() => Math.random() - 0.5);
+    return [...packSelect, ...packSelect].sort(() => Math.random() - 0.5);
   });
   const [mov, setMov] = useState(0); //Score
   const [matchedCard, setMatchedCard] = useState<number[]>([]); //Parejas encontradas
@@ -57,7 +56,7 @@ export default function Payload() {
     setMatchedCard([]);
     setSelectedCard([]);
     setMov(0);
-    setCards([...cardsB, ...cardsB].sort(() => Math.random() - 0.5));
+    setCards([...packSelect, ...packSelect].sort(() => Math.random() - 0.5));
   };
 
   return (
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
   },
   resetButton: {
     padding: 10,
