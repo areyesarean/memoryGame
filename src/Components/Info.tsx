@@ -7,6 +7,7 @@ interface Props {
 }
 
 export default function Info({ winn, score }: Props) {
+  
   const getValoracion = () => {
     if (score === 12) return "🤯😲";
     if (score >= 13 && score <= 15) return "😮";
