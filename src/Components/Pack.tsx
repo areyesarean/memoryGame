@@ -18,13 +18,11 @@ export default function Pack({ namePack }: Props) {
         active={packSelect.includes(pack[0])}
         onPress={() => handlePackSelect(namePack)}
       />
-      {pack.map((emoji, index) => {
-        return (
-          <Text style={styles.emoji} key={index}>
-            {emoji}
-          </Text>
-        );
-      })}
+      {pack.map((emoji, index) => (
+        <Text style={styles.emoji} key={index}>
+          {emoji}
+        </Text>
+      ))}
     </View>
   );
 }
