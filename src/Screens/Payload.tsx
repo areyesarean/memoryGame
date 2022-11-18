@@ -78,13 +78,20 @@ export default function Payload() {
         })}
       </View>
 
-      {PlayerWin() ? (
+      {PlayerWin() && (
         <TouchableOpacity style={styles.resetButton} onPress={Reset}>
           <Text style={styles.textWhite}>Reiniciar Partida</Text>
         </TouchableOpacity>
-      ) : (
-        <TouchableOpacity style={styles.resetButton} onPress={Reset}>
-          <Text style={styles.textWhite}>Volver a comenzar</Text>
+      )}
+      {!PlayerWin() && (
+        <TouchableOpacity
+          style={!mov ? styles.disabledButton : styles.resetButton}
+          disabled={!mov}
+          onPress={Reset}
+        >
+          <Text style={!mov ? styles.textDisabled : styles.textWhite}>
+            Volver a comenzar
+          </Text>
         </TouchableOpacity>
       )}
     </View>
@@ -115,6 +122,18 @@ const styles = StyleSheet.create({
   },
   textWhite: {
     color: "#05eeff",
+    fontSize: 20,
+    fontWeight: "800",
+  },
+  disabledButton: {
+    padding: 10,
+    borderRadius: 20,
+    borderWidth: 4,
+    borderColor: "#47708b",
+    backgroundColor: "#334d5e",
+  },
+  textDisabled: {
+    color: "#969696",
     fontSize: 20,
     fontWeight: "800",
   },
