@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Info from "../Components/Info";
 import Card from "../Components/Card";
-
-const cardsB: string[] = ["😎", "🎉", "🤑", "🎈", "🎁", "⚽"];
-const cardsB1: string[] = ["🤩", "🌍", "🤡", "☀", "🎅", "🎃"];
+import useGameContext from "../Hooks/useGameContext";
 
 export default function Payload() {
+  const { packSelect } = useGameContext();
   const [cards, setCards] = useState(() => {
-    return [...cardsB, ...cardsB].sort(() => Math.random() - 0.5);
+    return [...packSelect, ...packSelect].sort(() => Math.random() - 0.5);
   });
   const [mov, setMov] = useState(0); //Score
   const [matchedCard, setMatchedCard] = useState<number[]>([]); //Parejas encontradas
@@ -57,7 +56,7 @@ export default function Payload() {
     setMatchedCard([]);
     setSelectedCard([]);
     setMov(0);
-    setCards([...cardsB, ...cardsB].sort(() => Math.random() - 0.5));
+    setCards([...packSelect, ...packSelect].sort(() => Math.random() - 0.5));
   };
 
   return (
@@ -79,13 +78,20 @@ export default function Payload() {
         })}
       </View>
 
-      {PlayerWin() ? (
+      {PlayerWin() && (
         <TouchableOpacity style={styles.resetButton} onPress={Reset}>
           <Text style={styles.textWhite}>Reiniciar Partida</Text>
         </TouchableOpacity>
-      ) : (
-        <TouchableOpacity style={styles.resetButton} onPress={Reset}>
-          <Text style={styles.textWhite}>Volver a comenzar</Text>
+      )}
+      {!PlayerWin() && (
+        <TouchableOpacity
+          style={!mov ? styles.disabledButton : styles.resetButton}
+          disabled={!mov}
+          onPress={Reset}
+        >
+          <Text style={!mov ? styles.textDisabled : styles.textWhite}>
+            Volver a comenzar
+          </Text>
         </TouchableOpacity>
       )}
     </View>
@@ -105,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    marginBottom: 10
+    marginBottom: 10,
   },
   resetButton: {
     padding: 10,
@@ -116,6 +122,18 @@ const styles = StyleSheet.create({
   },
   textWhite: {
     color: "#05eeff",
+    fontSize: 20,
+    fontWeight: "800",
+  },
+  disabledButton: {
+    padding: 10,
+    borderRadius: 20,
+    borderWidth: 4,
+    borderColor: "#47708b",
+    backgroundColor: "#334d5e",
+  },
+  textDisabled: {
+    color: "#969696",
     fontSize: 20,
     fontWeight: "800",
   },

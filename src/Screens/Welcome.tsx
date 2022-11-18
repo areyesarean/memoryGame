@@ -1,23 +1,28 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from "@expo/vector-icons";
-
-const cardsB: string[] = ["😎", "🎉", "🎶", "🎈", "🎁", "⚽"];
-const cardsB1: string[] = ["🤩", "🌍", "🛩", "☀", "🎅", "🎃"];
 
 export default function Welcome() {
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Juego de Memoria</Text>
-      {/* <Text style={styles.textSmall}>Selecciona un pack de emojis</Text> */}
-      <TouchableOpacity
-        style={styles.resetButton}
-        onPress={() => navigation.navigate("Payload" as never)}
-      >
-        <Text style={styles.textButton}>Jugar</Text>
-      </TouchableOpacity>
+      <View style={styles.containerButtons}>
+        <TouchableOpacity
+          style={styles.resetButton}
+          onPress={() => navigation.navigate("Payload" as never)}
+        >
+          <Text style={styles.textButton}>Jugar 😎</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.resetButton}
+          onPress={() => navigation.navigate("Packs" as never)}
+        >
+          <Text style={styles.textButton}>Packs de emojis 🤩</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -29,6 +34,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
+  containerButtons: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
   title: {
     color: "#fff",
     fontSize: 45,
@@ -37,12 +46,15 @@ const styles = StyleSheet.create({
   resetButton: {
     alignItems: "center",
     justifyContent: "center",
+    width: 300,
     paddingVertical: 15,
-    paddingHorizontal: 50,
+    paddingHorizontal: 20,
     borderRadius: 20,
     borderWidth: 4,
+    marginBottom: 10,
     borderColor: "#0f67a1",
     backgroundColor: "#093e61",
+    textAlign: "center",
   },
   textButton: {
     color: "#05eeff",

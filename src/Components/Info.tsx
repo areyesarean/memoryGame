@@ -7,15 +7,15 @@ interface Props {
 }
 
 export default function Info({ winn, score }: Props) {
+  
   const getValoracion = () => {
-    if (score === 12) return "🤯";
-    if (score >= 13 && score <= 20) return "😮";
-    if (score >= 21 && score <= 30) return "🤩";
-    if (score >= 31 && score <= 40) return "🙄";
-    if (score >= 31 && score <= 40) return "😑";
-    if (score >= 41 && score <= 50) return "🤢";
-    if (score >= 51 && score <= 60) return "🤮";
-    if (score > 61) return "🤡";
+    if (score === 12) return "🤯😲";
+    if (score >= 13 && score <= 15) return "😮";
+    if (score >= 16 && score <= 20) return "🤩";
+    if (score >= 21 && score <= 25) return "🙄";
+    if (score >= 26 && score <= 30) return "🤢";
+    if (score >= 31 && score <= 35) return "🤮";
+    if (score > 35) return "🤡";
   };
 
   return (
