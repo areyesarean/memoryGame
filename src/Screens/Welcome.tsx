@@ -6,30 +6,31 @@ import useGameContext from "../Hooks/useGameContext";
 import { NamePacks } from "../Contexts/ContextGame";
 
 export default function Welcome() {
-  const {handlePackSelect} = useGameContext();
+  const { handlePackSelect } = useGameContext();
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const pack = await AsyncStorage.getItem('@packSelect')
-        if(pack !== null) {
-          handlePackSelect(pack as NamePacks)
+        const pack = await AsyncStorage.getItem("@packSelect");
+        if (pack !== null) {
+          handlePackSelect(pack as NamePacks);
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e);
       }
-    }
-    getData()
-  }, [])
+    };
+    getData();
+  }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Juego de Memoria</Text>
       <View style={styles.containerButtons}>
-        <ButtonMenu to="Payload" title="Jugar 😎" />
-        <ButtonMenu to="Packs" title="Packs de emojis 🤩" />
-        <ButtonMenu to="Scores" title="Tus puntuaciones 🤓" />
+        <ButtonMenu to="Payload" title="Jugar" />
+        <ButtonMenu to="Packs" title="Packs de emojis" />
+        {/* <ButtonMenu to="Scores" title="Tus puntuaciones 🤓" /> */}
       </View>
+      <Text style={styles.infoMe}>areyesarean 2022 v0.1</Text>
     </View>
   );
 }
@@ -49,5 +50,10 @@ const styles = StyleSheet.create({
     color: "#05eeff",
     fontSize: 45,
     fontWeight: "900",
+  },
+  infoMe: {
+    position: "absolute",
+    bottom: 10,
+    color: "#0b3c5e",
   },
 });
