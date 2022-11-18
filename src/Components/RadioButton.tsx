@@ -3,12 +3,13 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 interface Props {
-  active: boolean;
+  active?: boolean;
+  onPress?: () => void;
 }
 
-export default function RadioButton({ active}: Props) {
+export default function RadioButton({ active, onPress }: Props) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       {active && <AntDesign name="checkcircle" color="#05eeff" size={20} />}
     </TouchableOpacity>
   );
