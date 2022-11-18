@@ -1,32 +1,43 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import RadioButton from "../Components/RadioButton";
 
-const cardsB0: string[] = ["😎", "🎉", "🎶", "🎈", "🎁", "⚽"];
-const cardsB1: string[] = ["🤩", "🌍", "🛩", "☀", "🎅", "🎃"];
+const pack0: string[] = ["😎", "🎉", "🎶", "🎈", "🎁", "⚽"];
+const pack1: string[] = ["🤩", "🌍", "🛩", "☀", "🎅", "🎃"];
 
 export default function PackEmojis() {
+  const [firstPackActive, setFirstPackActive] = useState(true)
+  const [secondPackActive, setSecondPackActive] = useState(false)
+
+  const handlePackSelected = () => {
+    setFirstPackActive(isActive => !isActive)
+    setSecondPackActive(isActive => !isActive)
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Packs de emojis</Text>
       <View>
-        <View style={styles.containerPack}>
-          {cardsB0.map((emoji, index) => {
+        <TouchableOpacity style={styles.containerPack} onPress={handlePackSelected}>
+          <RadioButton active={firstPackActive} />
+          {pack0.map((emoji, index) => {
             return (
               <Text style={styles.emoji} key={index}>
                 {emoji}
               </Text>
             );
           })}
-        </View>
-        <View style={styles.containerPack}>
-          {cardsB1.map((emoji, index) => {
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.containerPack} onPress={handlePackSelected}>
+        <RadioButton active={secondPackActive} />
+          {pack1.map((emoji, index) => {
             return (
               <Text style={styles.emoji} key={index}>
                 {emoji}
               </Text>
             );
           })}
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -41,6 +52,8 @@ const styles = StyleSheet.create({
   },
   containerPack: {
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20
   },
   title: {
