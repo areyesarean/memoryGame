@@ -6,9 +6,9 @@ import useGameContext from "../Hooks/useGameContext";
 
 export default function Payload() {
   const { packSelect } = useGameContext();
-  const [cards, setCards] = useState(() => {
-    return [...packSelect, ...packSelect].sort(() => Math.random() - 0.5);
-  });
+  const [cards, setCards] = useState(() =>
+    [...packSelect, ...packSelect].sort(() => Math.random() - 0.5)
+  );
   const [mov, setMov] = useState(0); //Score
   const [matchedCard, setMatchedCard] = useState<number[]>([]); //Parejas encontradas
   const [selectedCard, setSelectedCard] = useState<number[]>([]); //Cartas Seleccionadas
@@ -20,9 +20,7 @@ export default function Payload() {
      */
     if (selectedCard.length === 1) {
       const timeoutId = setTimeout(() => {
-        if (selectedCard.length === 1) {
-          setSelectedCard([]);
-        }
+        setSelectedCard([]);
       }, 2000);
       return () => {
         clearTimeout(timeoutId);
@@ -38,9 +36,7 @@ export default function Payload() {
       setSelectedCard([]);
     } else {
       const timeoutId = setTimeout(() => setSelectedCard([]), 1000);
-      return () => {
-        clearTimeout(timeoutId);
-      };
+      return () => clearTimeout(timeoutId);
     }
   }, [selectedCard]);
 

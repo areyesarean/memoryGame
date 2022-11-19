@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { Text, Pressable, StyleSheet } from "react-native";
 import React from "react";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   onPress: () => void;
 }
 
-export default function Card({ fliped, children,onPress }: Props) {
+export default function Card({ fliped, children, onPress }: Props) {
   return (
     <Pressable style={styles.container} onPress={onPress}>
       {fliped ? (
