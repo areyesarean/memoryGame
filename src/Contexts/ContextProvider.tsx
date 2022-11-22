@@ -24,12 +24,6 @@ export default function ContextProvider({ children }: Props) {
   const [packSelect, setPackSelect] = useState<string[]>(allPacks.pack0);
   const [score, setScore] = useState<Score[]>([]);
 
-  useEffect(() => {
-    console.log(score);
-    
-  }, [score])
-  
-
   const handlePackSelect = useCallback(
     (pack: NamePacks) => {
       const getData = async () => {
@@ -45,25 +39,18 @@ export default function ContextProvider({ children }: Props) {
     [setPackSelect]
   );
 
-  const saveScore = useCallback(
-    (scoreNew: Score) => {
-      
-      const saveScoreLocal = async () => {
-        try {
-          const scoreStringify = JSON.stringify([...score, scoreNew]);
-          console.log("Stringify");
-          console.log(scoreStringify);
-          
-          await AsyncStorage.setItem("@score", scoreStringify);
-          console.log("Score saved");
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      saveScoreLocal();
-    },
-    [score]
-  );
+  const saveScore = useCallback((scoreNew: Score) => {
+    const saveScoreLocal = async () => {
+      try {
+        const scoreStringify = JSON.stringify([...score, scoreNew]);
+        await AsyncStorage.setItem("@score", scoreStringify);
+        console.log("Score saved");
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    saveScoreLocal();
+  }, [score]);
 
   const value = useMemo(
     () => ({
