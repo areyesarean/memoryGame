@@ -25,6 +25,14 @@ export default function Scores() {
     getScore();
   }, []);
 
+  if (scoreSort.length === 0)
+    return (
+      <View style={styles.containerError}>
+        <Text style={[styles.title, { textAlign: "center" }]}>
+          No ha jugado ninguna partida aún 🙄
+        </Text>
+      </View>
+    );
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tus puntuaciones</Text>
@@ -66,6 +74,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
   },
+  containerError: {
+    flex: 1,
+    backgroundColor: "#072a42",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   containerScore: {
     width: "100%",
     flexDirection: "row",
@@ -79,7 +93,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#05eeffb3",
     borderRadius: 10,
-    padding: 5
+    padding: 5,
   },
   text: {
     color: "#fff",
