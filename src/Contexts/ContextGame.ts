@@ -9,10 +9,17 @@ import {createContext} from 'react'
 
 export type NamePacks = "pack0" | "pack1"| "pack2" | "pack3";
 
+export interface Score {
+  score: number;
+  emoji: string;
+}
 export interface ContextGameType {
   packSelect: string[],
   packs: Packs,
   handlePackSelect: (pack: NamePacks) => void
+  score: Score[]
+  saveScore: (score: Score) => void,
+  setScore: (score: Score[]) => void
 }
 
 export const ContextGame = createContext<ContextGameType>({} as ContextGameType);

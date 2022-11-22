@@ -5,7 +5,7 @@ import Card from "../Components/Card";
 import useGameContext from "../Hooks/useGameContext";
 
 export default function Payload() {
-  const { packSelect } = useGameContext();
+  const { packSelect, saveScore } = useGameContext();
   const [cards, setCards] = useState(() =>
     [...packSelect, ...packSelect].sort(() => Math.random() - 0.5)
   );
@@ -13,7 +13,21 @@ export default function Payload() {
   const [matchedCard, setMatchedCard] = useState<number[]>([]); //Parejas encontradas
   const [selectedCard, setSelectedCard] = useState<number[]>([]); //Cartas Seleccionadas
 
+  const getValoracion = () => {
+    if (mov === 12) return "🤯😲";
+    if (mov >= 13 && mov <= 15) return "😮";
+    if (mov >= 16 && mov <= 20) return "🤩";
+    if (mov >= 21 && mov <= 25) return "🙄";
+    if (mov >= 26 && mov <= 30) return "🤢";
+    if (mov >= 31 && mov <= 35) return "🤮";
+    if (mov > 35) return "🤡";
+  };
   useEffect(() => {
+
+    if (matchedCard.length === cards.length) {
+      console.log("Win");
+      saveScore({ score: mov, emoji: getValoracion() || "😴" });
+    }
     /*
      * Si volteas solo una tarjeta y no vuelves a seleccionar otra
      * en menos de 2 segundos la tarjeta se voltea
@@ -38,6 +52,8 @@ export default function Payload() {
       const timeoutId = setTimeout(() => setSelectedCard([]), 1000);
       return () => clearTimeout(timeoutId);
     }
+
+    
   }, [selectedCard]);
 
   const handleOnPress = (index: number) => {
@@ -46,7 +62,9 @@ export default function Payload() {
     setMov((mov) => mov + 1);
   };
 
-  const PlayerWin = () => matchedCard.length === cards.length;
+  const PlayerWin = () => {
+    return matchedCard.length === cards.length
+  };
 
   const Reset = () => {
     setMatchedCard([]);

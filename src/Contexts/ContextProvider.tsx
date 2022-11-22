@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState, useMemo, useCallback, useEffect } from "react";
-import { ContextGame, NamePacks, Packs } from "./ContextGame";
+import { ContextGame, NamePacks, Packs, Score } from "./ContextGame";
 
 interface Props {
   children: React.ReactNode;
@@ -22,6 +22,13 @@ let allPacks: Packs = {
 
 export default function ContextProvider({ children }: Props) {
   const [packSelect, setPackSelect] = useState<string[]>(allPacks.pack0);
+  const [score, setScore] = useState<Score[]>([]);
+
+  useEffect(() => {
+    console.log(score);
+    
+  }, [score])
+  
 
   const handlePackSelect = useCallback(
     (pack: NamePacks) => {
@@ -38,9 +45,36 @@ export default function ContextProvider({ children }: Props) {
     [setPackSelect]
   );
 
+  const saveScore = useCallback(
+    (scoreNew: Score) => {
+      
+      const saveScoreLocal = async () => {
+        try {
+          const scoreStringify = JSON.stringify([...score, scoreNew]);
+          console.log("Stringify");
+          console.log(scoreStringify);
+          
+          await AsyncStorage.setItem("@score", scoreStringify);
+          console.log("Score saved");
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      saveScoreLocal();
+    },
+    [score]
+  );
+
   const value = useMemo(
-    () => ({ packSelect, packs: allPacks, handlePackSelect }),
-    [packSelect]
+    () => ({
+      packSelect,
+      packs: allPacks,
+      handlePackSelect,
+      score,
+      saveScore,
+      setScore,
+    }),
+    [packSelect, score]
   );
 
   return <ContextGame.Provider value={value}>{children}</ContextGame.Provider>;
