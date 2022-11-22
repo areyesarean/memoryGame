@@ -7,10 +7,11 @@ import Welcome from "./src/Screens/Welcome";
 import PackEmojis from "./src/Screens/PackEmojis";
 import ContextProvider from "./src/Contexts/ContextProvider";
 import Scores from "./src/Screens/Scores";
+import Options from "./src/Screens/Options";
 
 const Stack = createNativeStackNavigator();
 
-export type RouteNames = "Welcome" | "Payload" | "Packs" | "Scores"
+export type RouteNames = "Welcome" | "Payload" | "Packs" | "Scores" | "Options"
 
 export default function App() {
 
@@ -28,6 +29,7 @@ export default function App() {
           <Stack.Screen name="Payload" component={Payload} />
           <Stack.Screen name="Packs" component={PackEmojis} />
           <Stack.Screen name="Scores" component={Scores} />
+          <Stack.Screen name="Options" component={Options} />
         </Stack.Navigator>
         <StatusBar style="light" />
       </NavigationContainer>

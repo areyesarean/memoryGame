@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import ButtonMenu from "../Components/ButtonMenu";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useGameContext from "../Hooks/useGameContext";
-import { NamePacks, Score } from "../Contexts/ContextGame";
+import { NamePacks } from "../Contexts/ContextGame";
 
 export default function Welcome() {
   const { handlePackSelect } = useGameContext();
@@ -29,6 +29,7 @@ export default function Welcome() {
         <ButtonMenu to="Payload" title="Jugar" />
         <ButtonMenu to="Packs" title="Packs de emojis" />
         <ButtonMenu to="Scores" title="Puntuaciones" />
+        <ButtonMenu to="Options" title="Opciones" />
       </View>
       <Text style={styles.infoMe}>areyesarean 2022 v0.1</Text>
     </View>
