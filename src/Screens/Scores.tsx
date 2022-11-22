@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
-import useGameContext from "../Hooks/useGameContext";
+import { View, Text, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useGameContext from "../Hooks/useGameContext";
 import { Score } from "../Contexts/ContextGame";
 
 export default function Scores() {
@@ -38,9 +38,8 @@ export default function Scores() {
       <Text style={styles.title}>Tus puntuaciones</Text>
       <View>
         <View style={styles.containerScore}>
-          <Text style={styles.text}>No</Text>
-          <Text style={styles.text}>Puntaje</Text>
-          <Text style={styles.text}>Valoracion</Text>
+          <Text style={styles.text}>Puntuación</Text>
+          <Text style={styles.text}>Valoración</Text>
         </View>
         {scoreSort.map((score, index) => (
           <View
@@ -51,9 +50,6 @@ export default function Scores() {
                 : styles.containerScore
             }
           >
-            <Text style={index + 1 === 1 ? styles.bestScore : styles.text}>
-              {index + 1}
-            </Text>
             <Text style={index + 1 === 1 ? styles.bestScore : styles.text}>
               {score.score}
             </Text>
@@ -73,6 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#072a42",
     alignItems: "center",
     justifyContent: "flex-start",
+    padding: 5
   },
   containerError: {
     flex: 1,
