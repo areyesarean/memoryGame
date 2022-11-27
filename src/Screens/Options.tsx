@@ -5,20 +5,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import useGameContext from "../Hooks/useGameContext";
 
 export default function Options() {
-  const {setScore} = useGameContext()
+  const { setScore } = useGameContext();
   const removeScore = () => {
-    const remove = async() => {
+    const remove = async () => {
       try {
         await AsyncStorage.removeItem("@score");
-        setScore([])
-        alert("El registro de puntuación ha sido eliminado")
+        setScore([]);
+        alert("El registro de puntuación ha sido eliminado");
       } catch (error) {
         console.log(error);
-        
       }
-    }
+    };
     remove();
-  }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Opciones</Text>
