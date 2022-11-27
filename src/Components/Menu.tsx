@@ -1,15 +1,28 @@
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import React from "react";
-import { useNavigation } from "@react-navigation/native";
-import { RouteNames } from "../../App";
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { RouteNames } from '../../App'
+import { useNavigation } from '@react-navigation/native'
 
-interface Props {
+interface MenuProps{
+  children: React.ReactNode
+}
+
+export default function Menu({children}: MenuProps) {
+  return (
+    <View style={styles.container}>
+      {children}
+    </View>
+  )
+}
+
+
+interface MenuItemProps {
   to: RouteNames
   title: string
   onPress?: () => void
 }
 
-export default function ButtonMenu({to, title, onPress}: Props) {
+function MenuItem({to, title, onPress}: MenuItemProps) {
   const navigation = useNavigation();
   
   return (
@@ -22,7 +35,13 @@ export default function ButtonMenu({to, title, onPress}: Props) {
   );
 }
 
+Menu.Item = MenuItem;
+
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
   resetButton: {
     alignItems: "center",
     justifyContent: "center",

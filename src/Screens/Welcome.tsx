@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
-import ButtonMenu from "../Components/ButtonMenu";
+import { View, Text, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useGameContext from "../Hooks/useGameContext";
 import { NamePacks } from "../Contexts/ContextGame";
+import Menu from "../Components/Menu";
 
 export default function Welcome() {
   const { handlePackSelect } = useGameContext();
@@ -25,13 +25,13 @@ export default function Welcome() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Juego de Memoria</Text>
-      <View style={styles.containerButtons}>
-        <ButtonMenu to="Payload" title="Jugar" />
-        <ButtonMenu to="Packs" title="Packs de emojis" />
-        <ButtonMenu to="Scores" title="Puntuaciones" />
-        <ButtonMenu to="Options" title="Opciones" />
-      </View>
-      <Text style={styles.infoMe}>areyesarean 2022 v0.1</Text>
+      <Menu>
+        <Menu.Item to="Payload" title="Jugar"/>
+        <Menu.Item to="Packs" title="Packs de emojis" />
+        <Menu.Item to="Scores" title="Puntuaciones" />
+        <Menu.Item to="Options" title="Opciones" />
+      </Menu>
+      <Text style={styles.infoMe}>areyesarean 2022 v0.5</Text>
     </View>
   );
 }
@@ -42,10 +42,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#072a42",
     alignItems: "center",
     justifyContent: "space-evenly",
-  },
-  containerButtons: {
-    alignItems: "center",
-    justifyContent: "center",
   },
   title: {
     color: "#05eeff",
