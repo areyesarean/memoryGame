@@ -42,7 +42,9 @@ export default function ContextProvider({ children }: Props) {
   const saveScore = useCallback((scoreNew: Score) => {
     const saveScoreLocal = async () => {
       try {
-        const scoreStringify = JSON.stringify([...score, scoreNew]);
+        let set = new Set( [...score, scoreNew].map( el => JSON.stringify(el) ) )
+        let arrUniqueElements = Array.from( set ).map( el => JSON.parse(el) );
+        const scoreStringify = JSON.stringify(arrUniqueElements);
         await AsyncStorage.setItem("@score", scoreStringify);
         console.log("Score saved");
       } catch (e) {
