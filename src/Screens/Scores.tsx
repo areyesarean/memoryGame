@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useGameContext from "../Hooks/useGameContext";
 import { Score } from "../Contexts/ContextGame";
@@ -10,6 +10,7 @@ export default function Scores() {
   const scoreSort = score.sort((a, b) => {
     return a.score - b.score;
   });
+
   useEffect(() => {
     const getScore = async () => {
       try {
@@ -17,6 +18,8 @@ export default function Scores() {
         if (score !== null) {
           const scoreParse: Score[] = JSON.parse(score);
           setScore(scoreParse);
+          console.log(scoreParse);
+          
         }
       } catch (e) {
         console.log(e);
@@ -25,14 +28,16 @@ export default function Scores() {
     getScore();
   }, []);
 
-  if (scoreSort.length === 0)
+  if (scoreSort.length === 0) {
     return (
       <View style={styles.containerError}>
         <Text style={[styles.title, { textAlign: "center" }]}>
-          No ha jugado ninguna partida aún 🙄
+          No haz jugado ninguna partida aún 🙄
         </Text>
       </View>
     );
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tus puntuaciones</Text>
@@ -41,24 +46,33 @@ export default function Scores() {
           <Text style={styles.text}>Puntuación</Text>
           <Text style={styles.text}>Valoración</Text>
         </View>
-        {scoreSort.map((score, index) => (
-          <View
-            key={index}
-            style={
-              index + 1 === 1
-                ? styles.containerScoreBest
-                : styles.containerScore
-            }
-          >
-            <Text style={index + 1 === 1 ? styles.bestScore : styles.text}>
-              {score.score}
-            </Text>
-            <Text style={index + 1 === 1 ? styles.bestScore : styles.text}>
-              {score.emoji}
-            </Text>
-          </View>
-        ))}
+        <ScrollView>
+          {scoreSort.map((score, index) => (
+            <ScoreItem key={index} {...{ score, index }} />
+          ))}
+        </ScrollView>
       </View>
+    </View>
+  );
+}
+
+function ScoreItem({ score, index }: any) {
+  return (
+    <View
+      key={index}
+      style={index === 0 ? styles.containerScoreBest : styles.containerScore}
+    >
+      <Text style={index === 0 ? styles.bestScore : styles.text}>
+        {score.score}
+      </Text>
+      <Text
+        style={[
+          index === 0 ? styles.bestScore : styles.text,
+          { marginLeft: 50 },
+        ]}
+      >
+        {score.emoji}
+      </Text>
     </View>
   );
 }
@@ -69,7 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#072a42",
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: 5
+    padding: 5,
   },
   containerError: {
     flex: 1,
