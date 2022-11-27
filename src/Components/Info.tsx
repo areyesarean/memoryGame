@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import useGameContext from "../Hooks/useGameContext";
 
 interface Props {
   winn: boolean;
@@ -7,7 +8,19 @@ interface Props {
 }
 
 export default function Info({ winn, score }: Props) {
+  const { score: scores } = useGameContext();
+
+  const minScore = useMemo(() => {
+    let min = scores[0]?.score === undefined ? 100 : scores[0]?.score
+    scores.forEach((element) => {
+      if (element.score < min) {
+        min = element.score;
+      }
+    });
+    return min;
+  }, [score]);
   
+
   const getValoracion = () => {
     if (score === 12) return "🤯😲";
     if (score >= 13 && score <= 15) return "😮";
@@ -20,9 +33,12 @@ export default function Info({ winn, score }: Props) {
 
   return (
     <View style={styles.container}>
-      { winn && (<Text style={winn ? [styles.title, styles.titleWin] : styles.title}>
-        🎉 Haz Ganado 🎉
-      </Text>)}
+      
+      {winn && (
+        <Text style={winn ? [styles.title, styles.titleWin] : styles.title}>
+          {score < minScore ? "🤯Nuevo Record 🤯": "🎉 Haz Ganado 🎉"}
+        </Text>
+      )}
       <View style={styles.containerTextMov}>
         <Text style={[styles.title, styles.titleMov]}>Movimientos: </Text>
         <Text style={winn ? [styles.title, styles.titleMovWin] : styles.title}>
