@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Info from "../Components/Info";
-import Card from "../Components/Card";
 import useGameContext from "../Hooks/useGameContext";
 import Button from "../Components/Button";
+import Board from "../Components/Board";
 
 export default function Payload() {
   const { packSelect, saveScore } = useGameContext();
@@ -23,6 +23,7 @@ export default function Payload() {
     if (mov >= 31 && mov <= 35) return "🤮";
     if (mov > 35) return "🤡";
   };
+
   useEffect(() => {
 
     if (matchedCard.length === cards.length) {
@@ -76,23 +77,8 @@ export default function Payload() {
 
   return (
     <View style={styles.container}>
-      <Info winn={PlayerWin()} score={mov} />
-      <View style={styles.board}>
-        {cards.map((card, index) => {
-          const fliped =
-            selectedCard.includes(index) || matchedCard.includes(index);
-          return (
-            <Card
-              key={index}
-              fliped={fliped}
-              onPress={() => handleOnPress(index)}
-            >
-              {card}
-            </Card>
-          );
-        })}
-      </View>
-
+      <Info {...{PlayerWin, mov}}/>
+      <Board {...{cards, selectedCard, matchedCard, handleOnPress}}/>
       <Button {...{PlayerWin, Reset, mov} }/>
     </View>
   );
@@ -104,13 +90,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#072a42",
     alignItems: "center",
     justifyContent: "center",
-  },
-  board: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
-    marginBottom: 10,
   }
 });
