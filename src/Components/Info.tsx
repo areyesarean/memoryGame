@@ -3,11 +3,11 @@ import { View, Text, StyleSheet } from "react-native";
 import useGameContext from "../Hooks/useGameContext";
 
 interface Props {
-  winn: boolean;
-  score: number;
+  PlayerWin: () => boolean;
+  mov: number;
 }
 
-export default function Info({ winn, score }: Props) {
+export default function Info({ PlayerWin, mov: score }: Props) {
   const { score: scores } = useGameContext();
 
   const minScore = useMemo(() => {
@@ -29,18 +29,18 @@ export default function Info({ winn, score }: Props) {
   return (
     <View style={styles.container}>
       
-      {winn && (
-        <Text style={winn ? [styles.title, styles.titleWin] : styles.title}>
+      {PlayerWin() && (
+        <Text style={PlayerWin() ? [styles.title, styles.titleWin] : styles.title}>
           {score < minScore ? "🤯Nuevo Record 🤯": "🎉 Haz Ganado 🎉"}
         </Text>
       )}
       <View style={styles.containerTextMov}>
         <Text style={[styles.title, styles.titleMov]}>Movimientos: </Text>
-        <Text style={winn ? [styles.title, styles.titleMovWin] : styles.title}>
+        <Text style={PlayerWin() ? [styles.title, styles.titleMovWin] : styles.title}>
           {score}
         </Text>
       </View>
-      {winn && (
+      {PlayerWin() && (
         <Text style={[styles.title, styles.titleMov]}>
           Valoración de la partida: {getValoracion()}
         </Text>
