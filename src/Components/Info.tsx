@@ -11,14 +11,9 @@ export default function Info({ winn, score }: Props) {
   const { score: scores } = useGameContext();
 
   const minScore = useMemo(() => {
-    let min = scores[0]?.score === undefined ? 100 : scores[0]?.score
-    scores.forEach((element) => {
-      if (element.score < min) {
-        min = element.score;
-      }
-    });
-    return min;
-  }, [score]);
+    const min = scores.sort((a, b) => a.score - b.score);
+    return min[0]?.score === undefined ? 1000 : min[0]?.score;
+  }, [scores]);
   
 
   const getValoracion = () => {
@@ -53,6 +48,7 @@ export default function Info({ winn, score }: Props) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
