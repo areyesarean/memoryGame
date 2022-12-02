@@ -39,14 +39,14 @@ export default function Welcome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#072a42",
     alignItems: "center",
     justifyContent: "space-evenly",
+    backgroundColor: "#072a42",
   },
   title: {
-    color: "#05eeff",
     fontSize: 45,
     fontWeight: "900",
+    color: "#05eeff",
   },
   infoMe: {
     position: "absolute",
