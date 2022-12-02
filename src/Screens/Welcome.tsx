@@ -31,7 +31,7 @@ export default function Welcome() {
         <Menu.Item to="Scores" title="Puntuaciones" />
         <Menu.Item to="Options" title="Opciones" />
       </Menu>
-      <Text style={styles.infoMe}>areyesarean 2022 v0.5</Text>
+      <Text style={styles.infoMe}>areyesarean 2022 v0.1.0</Text>
     </View>
   );
 }
