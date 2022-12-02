@@ -23,6 +23,7 @@ export default function App() {
           screenOptions={{
             statusBarColor: "#072a42",
             headerShown: false,
+            animation: "slide_from_right"
           }}
         >
           <Stack.Screen name="Welcome" component={Welcome} />
