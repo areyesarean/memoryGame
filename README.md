@@ -1,3 +1,4 @@
-# memoryGame
-Juego de voltear cartas
-React Native Expo
+# Memory Game
+**Juego de voltear cartas**
+
+Desarrollado con React Native y Expo
