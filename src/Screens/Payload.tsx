@@ -15,7 +15,7 @@ export default function Payload() {
   const [selectedCard, setSelectedCard] = useState<number[]>([]); //Cartas Seleccionadas
 
   const getValoracion = () => {
-    if (mov === 12) return "🤯😲";
+    if (mov <= 12) return "🤯😲";
     if (mov >= 13 && mov <= 15) return "😮";
     if (mov >= 16 && mov <= 20) return "🤩";
     if (mov >= 21 && mov <= 25) return "🙄";
@@ -25,7 +25,6 @@ export default function Payload() {
   };
 
   useEffect(() => {
-
     if (matchedCard.length === cards.length) {
       console.log("Win");
       saveScore({ score: mov, emoji: getValoracion() || "😴" });
@@ -54,18 +53,21 @@ export default function Payload() {
       const timeoutId = setTimeout(() => setSelectedCard([]), 1000);
       return () => clearTimeout(timeoutId);
     }
-
-    
   }, [selectedCard]);
 
   const handleOnPress = (index: number) => {
-    if (selectedCard.length >= 2 || selectedCard.includes(index)) return;
+    if (
+      selectedCard.length >= 2 ||
+      selectedCard.includes(index) ||
+      matchedCard.includes(index)
+    )return;
+
     setSelectedCard((selectedCard) => [...selectedCard, index]);
     setMov((mov) => mov + 1);
   };
 
   const PlayerWin = () => {
-    return matchedCard.length === cards.length
+    return matchedCard.length === cards.length;
   };
 
   const Reset = () => {
@@ -77,9 +79,9 @@ export default function Payload() {
 
   return (
     <View style={styles.container}>
-      <Info {...{PlayerWin, mov}}/>
-      <Board {...{cards, selectedCard, matchedCard, handleOnPress}}/>
-      <Button {...{PlayerWin, Reset, mov} }/>
+      <Info {...{ PlayerWin, mov }} />
+      <Board {...{ cards, selectedCard, matchedCard, handleOnPress }} />
+      <Button {...{ PlayerWin, Reset, mov }} />
     </View>
   );
 }
@@ -90,5 +92,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#072a42",
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 });

@@ -16,8 +16,8 @@ export interface Score {
 export interface ContextGameType {
   packSelect: string[],
   packs: Packs,
-  handlePackSelect: (pack: NamePacks) => void
   score: Score[]
+  handlePackSelect: (pack: NamePacks) => void
   saveScore: (score: Score) => void,
   setScore: (score: Score[]) => void
 }
